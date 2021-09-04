@@ -1,0 +1,58 @@
+$main-color: #393d46;
+$main-background-color: #f6f7fb;
+$main-font-family: Verdana, sans-serif;
+
+.btn-custom {
+  border-radius: 0;
+  padding: 0.375rem 1.5rem;
+  background-color: $main-color;
+  color: white;
+}
+
+.btn-custom-outline {
+  border-radius: 0;
+  padding: 0.375rem 1.5rem;
+  border: 1px solid $main-color;
+  background-color: $main-background-color;
+}
+
+.btn-custom-icon {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.btn-custom-icon:active{
+  border: none;
+}
+.btn-custom-icon:focus{
+  border: none;
+  box-shadow: none;
+}
+
+.loader-container{
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid $main-color;
+  width: 50px;
+  height: 50px;
+  margin: auto;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

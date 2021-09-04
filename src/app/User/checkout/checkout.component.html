@@ -1,0 +1,228 @@
+<div class="container custom-cart-container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <h4>Checkout</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card custom-cart-card">
+                <div class="checkout-page">
+                    <div class="checkout-form">
+                        <form [formGroup]="order">
+                            <div class="col-lg-12 col-sm-12 col-xs-12">
+                                <div class="checkout-title">
+                                    <h5>Billing Details</h5>
+                                </div>
+                                <div class="row check-out">
+                                    <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                                        <div class="field-label">Name</div><input type="text" formControlName="buyername" name="buyername" value=""
+                                            placeholder="" autocomplete="off"
+                                            class="ng-untouched ng-pristine ng-invalid">
+                                            <span *ngIf="orderF.buyername.errors?.minlength" class="error-message">Enter valid name.</span>
+                                        <!---->
+                                        <!---->
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                                        <div class="field-label">Phone</div><input type="text" formControlName="phone" name="phone" value=""
+                                            placeholder="" autocomplete="off"
+                                            class="ng-untouched ng-pristine ng-invalid">
+                                            <span *ngIf="orderF.phone.errors?.pattern" class="error-message">Enter valid number.</span>
+                                        <!---->
+                                        <!---->
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                                        <div class="field-label">Email Address</div><input type="text" formControlName="email" name="email"
+                                            value="" placeholder="" autocomplete="off"
+                                            class="ng-untouched ng-pristine ng-invalid">
+                                            <span *ngIf="orderF.email.errors?.email" class="error-message">Enter valid email.</span>
+                                        <!---->
+                                        <!---->
+                                    </div>
+                                </div>
+                                <div formGroupName="shipping_address" class="row check-out">
+                                    <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                                        <div class="field-label">Address Line 1</div><input type="text" formControlName="address_line1" name="address_line1"
+                                            value="" placeholder="" autocomplete="off"
+                                            class="ng-pristine ng-invalid ng-touched">
+                                            <span *ngIf="shippingF.address_line1.errors?.minlength" class="error-message">Enter valid address.</span>
+                                        <!---->
+                                        <!---->
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                                        <div class="field-label">Address Line 2</div><input type="text" formControlName="address_line2" name="address_line2"
+                                            value="" placeholder="Address Line 2 (Optional)" autocomplete="off"
+                                            class="ng-pristine ng-invalid ng-touched">
+                                        <!---->
+                                        <!---->
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                                        <div class="field-label">State</div><select formControlName="state" name="state"
+                                            class="ng-dirty ng-valid ng-touched">
+                                            <option value="" disabled>Select State</option>
+                                            <option value="Central Singapore">Central Singapore</option>
+                                            <option value="North East">North East</option>
+                                            <option value="North West">North West</option>
+                                            <option value="South East">South East</option>
+                                            <option value="South West">South West</option>
+                                        </select>
+                                        <!---->
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                                        <div class="field-label">Town/City</div><input type="text" formControlName="city" name="city" value=""
+                                            placeholder="" autocomplete="off"
+                                            class="ng-untouched ng-pristine ng-invalid">
+                                        <!---->
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                                        <div class="field-label">Postal Code</div><input type="text" formControlName="postal_code" name="postal_code"
+                                            value="" placeholder="" autocomplete="off"
+                                            class="ng-untouched ng-pristine ng-invalid">
+                                            <span *ngIf="shippingF.postal_code.errors?.pattern" class="error-message">Enter valid postal code.</span>
+                                        <!---->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-list mb-2">
+                                <table class="table table-hover checkout-prod-table">
+                                    <thead>
+                                        <tr>
+                                            <!-- <th style="width: 30px;">#</th> -->
+                                            <th class="admin-order-prod-name">Product name</th>
+                                            <th class="admin-prod-data checkout-part-number">Part Number</th>
+                                            <th class="admin-prod-data checkout-prod-quantity">Quantity</th>
+                                            <th class="admin-prod-data checkout-prod-price">Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of products">
+                                            <!-- <th scope="row" style="width: 30px;">1</th> -->
+                                            <td class="admin-order-prod-name" style="width: 150px;">
+                                                <div>{{item.product_name}}</div>
+                                                <div style="color: red;" *ngIf="item.quantity > item.stock">
+                                                    Only {{item.stock}} left!
+                                                </div>
+                                            </td>
+                                            <td class="admin-prod-data checkout-part-number">{{item.part_number}}</td>
+                                            <td class="admin-prod-data checkout-prod-quantity">{{item.quantity}}</td>
+                                            <td class="admin-prod-data checkout-prod-price">Rs {{item.total_price}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="order-place-footer">
+                                <button type="button" class="btn btn-secondary order-place-button"
+                                    (click)="open(content)" [disabled]="cannotPlace">
+                                    Place Order
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss" style="min-width:600px; max-width: 1000px;">
+    <div class="modal-header">
+        <h5 class="modal-title">Select Payment Method</h5>
+        <button type="button" class="close" (click)="d('Cross click')" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <form [formGroup]="payment_details">
+        <div class="modal-body">
+            <div class="payment-method-outer">
+                <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> -->
+                <div class="payment-method">
+                    <label for="GPAY" class="payment-method-label" [ngClass]="paymentmethodlabel == 'paynow' ? 'show' : '' " (click)="paymentmethodlabel = 'paynow'">
+                        <input type="radio" class="payment-method-radio-button" id="GPAY" value="paynow" formControlName="mode" name="mode" checked>
+                        <div class="radio-button-selected"></div>
+                        <div class="payment-method-data">
+                            <div class="payment-method-data-in">
+                                <div class="payment-method-text">
+                                    <p class="method-p"><span>GPAY</span></p>
+                                </div>
+                                <div class="payment-method-info">
+                                    <div class="payment-info-icon" ngbTooltip="GPAY Tooltip!" placement="left" triggers="click:blur" ></div>
+                                </div>
+                                <div *ngIf="paymentmethodlabel == 'paynow'">
+                                    <p class="method-p"><span style="font-weight: 600; color: #000;">UEN: </span>201718499H</p>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                <div class="payment-method">
+                    <label for="banktransfer" class="payment-method-label" [ngClass]="paymentmethodlabel == 'banktrans' ? 'show' : '' " (click)="paymentmethodlabel = 'banktrans'">
+                        <input type="radio" class="payment-method-radio-button" id="banktransfer" value="banktransfer" formControlName="mode" name="mode"
+                            readonly="">
+                        <div class="radio-button-selected"></div>
+                        <div class="payment-method-data">
+                            <div class="payment-method-data-in">
+                                <div class="payment-method-text">
+                                    <p class="method-p"><span>Bank Transfer</span></p>
+                                </div>
+                                <div class="payment-method-info">
+                                    <div class="payment-info-icon" ngbTooltip="Bank Transfer Tooltip!" placement="left" tooltipClass="bank-transfer-tooltip" triggers="click:blur"></div>
+                                </div>
+                                <div *ngIf="paymentmethodlabel == 'banktrans'" class="banktransfer">
+                                    <p class="method-p"><span style="font-weight: 600; color: #000;">Beneficiary Name: </span> <span class="bank-details">Multi-Tech Marine Engineering Pte Ltd</span></p>
+                                    <p class="method-p"><span style="font-weight: 600; color: #000;">Beneficiary's Bank: </span> <span class="bank-details">United Overseas Bank Ltd (UOB)</span></p>
+                                    <p class="method-p"><span style="font-weight: 600; color: #000;">SGD Account No: </span><span class="bank-details">355-315-824-7</span></p>
+                                    <!-- <p class="method-p"><span style="font-weight: 600; color: #000;">Branch: </span><span class="bank-details">Singapore</span></p> -->
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                <!-- <div class="payment-method">
+                    <label for="phoneno" class="payment-method-label" [ngClass]="paymentmethodlabel == 'viaphone' ? 'show' : '' " (click)="paymentmethodlabel = 'viaphone'">
+                        <input type="radio" class="payment-method-radio-button" id="phoneno" value="phoneno" formControlName="mode" name="mode"
+                            readonly="">
+                        <div class="radio-button-selected"></div>
+                        <div class="payment-method-data">
+                            <div class="payment-method-data-in">
+                                <div>
+                                    <p class="method-p"><span>Phone Number</span></p>
+                                </div>
+                                <div *ngIf="paymentmethodlabel == 'viaphone'">
+                                    <p class="method-p">Kindly Make your payment on: <span style="font-weight: 600; color: #000;">1234567897</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                </div> -->
+                <div class="payment-method">
+                    <label for="cod" class="payment-method-label" [ngClass]="paymentmethodlabel == 'viacod' ? 'show' : '' " (click)="paymentmethodlabel = 'viacod'">
+                        <input type="radio" class="payment-method-radio-button" id="cod"
+                            readonly="" value="cod" formControlName="mode" name="mode">
+                        <div class="radio-button-selected"></div>
+                        <div class="payment-method-data">
+                            <div class="payment-method-data-in">
+                                <div class="cod-payment-method-text">
+                                    <p class="method-p"><span>Cash On Delivery</span></p>
+                                </div>
+                                <div class="payment-method-info"></div>
+                                <div *ngIf="paymentmethodlabel == 'viacod'" class="cod">
+                                    <p class="method-p"><span style="font-weight: 600; color: #000;">Kindly Collect Your Parcel from:</span></p>
+                                    <p class="method-p">8 Kaki Bukit Ave 4 #08-23 Premier @ Kaki Bukit</p>
+                                    <p class="method-p">S'pore 415875</p>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                <!-- </div> -->
+            </div>
+        </div>
+        <div class="modal-footer" [ngClass]="paymentmethodlabel == 'viacod' ? 'cod-proceed-button' : '' ">
+            <input type="text" id="transactionid" title="Please enter your ReferenceID for {{paymentF.mode.value}} after making payment*" class="txnid-text-field" formControlName="transaction_id" name="transaction_id" placeholder="Please enter your ReferenceID for {{paymentF.mode.value}} after making payment*" *ngIf="paymentmethodlabel != 'viacod'">
+            <button type="button" class="btn btn-secondary" style="background-color: #393d46;margin: 0;" (click)="placeOrdrer()">
+                Proceed
+            </button>
+        </div>
+    </form>
+</ng-template>
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>

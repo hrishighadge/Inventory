@@ -1,0 +1,266 @@
+@import './../../css/settings.scss';
+@import './../../css/svg.scss';
+
+.error-message{
+    color: red;
+}
+
+.custom-cart-container{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.custom-cart-card{
+  background-color: #ffffff;
+  padding: 1rem;
+  margin: 1.5rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgba(127, 157, 187, 0.2) 0px 8px 24px;
+}
+.cart-summary{
+    width: 100%;
+    margin-top: 15px;
+}
+.checkout-prod-table{
+    table-layout: fixed;
+    margin-bottom: 0;
+}
+.admin-prod-data{
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+.admin-order-prod-name{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 150px;
+}
+.checkout-part-number{
+    width: 130px;
+}
+.checkout-prod-quantity{
+    width: 100px;
+}
+.checkout-prod-price{
+    width: 80px;
+}
+.product-list{
+    max-height: 300px;
+    overflow-y: auto;
+    width: -webkit-fill-available;
+}
+.order-place-footer{
+    border-top: 1px solid #dee2e6;
+    width: 100%;
+    padding: 0.75rem 0.75rem 0rem;
+}
+.order-place-button{
+    float: right;
+    background-color: #393d46;
+    margin: 0;
+}
+.checkout-page{
+    width: -webkit-fill-available;
+}
+.checkout-page .checkout-title {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #dee2e6;
+}
+.checkout-page .checkout-title h3 {
+    color: #444;
+    font-weight: 700;
+}
+.check-out {
+    margin-bottom: 30px;
+}
+.checkout-page .checkout-form .form-group {
+    position: relative;
+    margin-bottom: 15px;
+}
+.checkout-page .checkout-form .form-group .field-label {
+    line-height: 24px;
+    text-transform: capitalize;
+    color: #333;
+    margin-bottom: 5px;
+    font-weight: 700;
+    font-size: 14px;
+}
+.checkout-page .checkout-form input[type=email], .checkout-page .checkout-form input[type=number], .checkout-page .checkout-form input[type=password], .checkout-page .checkout-form input[type=tel], .checkout-page .checkout-form input[type=text], .checkout-page .checkout-form input[type=url], .checkout-page .checkout-form select, .checkout-page .checkout-form textarea {
+    width: 100%;
+    padding: 0 22px;
+    height: 45px;
+    border: 1px solid #ddd;
+}
+#transactionid:placeholder-shown { /* WebKit, Blink, Edge */
+    font-size: 12px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+}
+// :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+//     font-size: 12px;
+//     overflow-wrap: break-word;
+//     word-wrap: break-word;
+// }
+// ::-moz-placeholder { /* Mozilla Firefox 19+ */
+//     font-size: 12px;
+//     overflow-wrap: break-word;
+//     word-wrap: break-word;
+// }
+// :-ms-input-placeholder { /* Internet Explorer 10-11 */
+//     font-size: 12px;
+//     overflow-wrap: break-word;
+//     word-wrap: break-word;
+// }
+@media (max-width: 767px){
+    .checkout-page .checkout-form input[type=email], .checkout-page .checkout-form input[type=number], .checkout-page .checkout-form input[type=password], .checkout-page .checkout-form input[type=tel], .checkout-page .checkout-form input[type=text], .checkout-page .checkout-form input[type=url], .checkout-page .checkout-form select, .checkout-page .checkout-form textarea {
+        height: 40px;
+    }
+    ::ng-deep .checkout-payment-modal{
+        .modal-body{
+            padding: 0px;
+        }
+        .modal-footer{
+            justify-content: space-between;
+        }
+        .modal-header{
+            padding: 0.5rem 1rem;
+        }
+    }
+    .txnid-text-field{
+        width: 70% !important;
+    }
+    ::ng-deep .tooltip{
+        left: 31px !important;
+        top: 0px !important;
+    }
+}
+@media only screen and (min-width: 576px){
+    ::ng-deep .checkout-payment-modal {
+      .modal-dialog {
+        max-width: 500px !important;
+        margin: 1.75rem auto !important;
+      }
+      .modal-header{
+        padding: 0.5rem 1rem;
+      }
+      .modal-body{
+          padding: 0px;
+        //   padding-bottom: 0px;
+        //   padding-top: 0px;
+      }
+      .modal-footer{
+          justify-content: space-between;
+      }
+    }
+}
+.payment-method-label{
+    display: flex;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    // align-items: center;
+    padding: 1rem 1rem;
+    margin-bottom: 0;
+}
+.show{
+    background-color: #f5faff;
+}
+.payment-method-radio-button {
+    visibility: hidden;
+    position: absolute;
+}
+.payment-method-radio-button:checked~ .radio-button-selected{
+    border-color: #2874f0;
+}
+.payment-method-radio-button:checked~ .payment-method-label{
+    background-color: #000;
+}
+.radio-button-selected {
+    display: inline-block;
+    border: 2px solid #979797;
+    border-radius: 100%;
+    height: 16px;
+    width: 16px;
+    position: relative;
+    vertical-align: top;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.payment-method-radio-button:checked~.radio-button-selected:before {
+    border: 2px hidden;
+    background-color: #2874f0;
+}
+.radio-button-selected:before {
+    content: "";
+    border-radius: 100%;
+    height: 8px;
+    width: 8px;
+    margin: auto;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+}
+.payment-method-data{
+    display: inline-block;
+    margin-left: 10px;
+    width: 100%;
+}
+.payment-method-data-in{
+    width: 100%;
+}
+.payment-method-text{
+    width: 93%;
+    float: left;
+}
+.cod-payment-method-text{
+    width: 100%;
+    float: left;
+}
+.payment-method-info{
+    width: 7%;
+    float: left;
+}
+::ng-deep .bank-transfer-tooltip{
+    top: 10px !important;
+}
+::ng-deep .cod-tooltip{
+    top: 17px !important;
+}
+@media only screen and(min-width: 768px) and(max-width: 1050px){
+    ::ng-deep .tooltip{
+        left: 3.5rem !important;
+    }
+}
+@media only screen and(min-width: 1051px) and (max-width:1300px){
+    ::ng-deep .tooltip{
+        left: 4.5rem !important;
+    }
+}
+@media only screen and(min-width: 1301px) and (max-width: 1700){
+    ::ng-deep .tooltip{
+        left: 4.5rem !important;
+    }
+}
+@media only screen and(min-width: 1701px){
+    ::ng-deep .tooltip{
+        left: 6rem !important;
+    }
+}
+.txnid-text-field{
+    margin: 0 0.25rem;
+    width: 80%;
+    padding: 5px;
+}
+.method-p{
+    margin-bottom: 0px;
+    overflow-wrap: break-word;
+}
+.bank-details{
+    font-size: 16px;
+}
+.cod-proceed-button{
+    justify-content: flex-end !important;
+}

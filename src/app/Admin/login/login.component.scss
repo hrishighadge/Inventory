@@ -1,0 +1,23 @@
+@import "../../css/settings.scss";
+.greeting {
+  font-size: 12px;
+}
+.login-main{
+  padding: 5rem 0;
+}
+.loginContainer {
+  max-width: 320px;
+  min-height: 450px;
+  background-color: #ffffff;
+  padding: 2rem 1rem;
+  margin: 0 auto;
+  box-shadow: rgba(127, 157, 187, 0.2) 0px 8px 24px;
+  // min-height: calc(100vh - 70px);
+}
+a {
+  color: $main-color;
+}
+.btn-login {
+  width: 100%;
+  margin-bottom: 1rem;
+}

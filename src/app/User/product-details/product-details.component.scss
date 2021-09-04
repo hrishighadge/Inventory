@@ -1,0 +1,44 @@
+@import './../../css/svg.scss';
+@import './../../css/settings.scss';
+
+.main-card-container{
+    // margin-top: 90px;
+    // margin-bottom: 100px;
+    margin: 0 auto;
+    padding: 5rem 0;
+}
+.product-details-image{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.img-thumbnail{
+    height: 400px;
+    object-fit: cover;
+}
+@media only screen and(max-width: 767px){
+    .main-card-container{
+        margin-top: 40px;
+        margin-bottom: 40px;
+        padding: 2rem 0;
+    } 
+    .row{
+        margin: 0 !important;
+    }
+    .img-thumbnail{
+        max-width: 90%;
+        height: 350px;
+    }
+    .product-image-responsive{
+        padding: 0;
+    }
+}
+.product-details-container{
+    padding: 10px;
+    color: $main-color;
+}
+
+.product-details-table-container{
+    margin-top: 10px;
+    margin-bottom: 0px;
+}

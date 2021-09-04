@@ -1,0 +1,33 @@
+<div class="landing-page-main">
+    <ngb-carousel *ngIf="!viewall">
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img src="/assets/banner2.webp" alt="Random first slide" class="banner-images-responsive">
+          </div>
+          <!-- <div class="carousel-caption">
+            <h3>First slide label</h3>
+          </div> -->
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img src="/assets/banner2.webp" alt="Random second slide" class="banner-images-responsive">
+          </div>
+          <!-- <div class="carousel-caption">
+            <h3>Second slide label</h3>
+          </div> -->
+        </ng-template>
+    </ngb-carousel>
+    <div class="container main-card-container">
+      <div class="view-all-row">
+        <h3 class="all-products-title">Products</h3>
+        <a *ngIf="!viewall" class="btn btn-dark btn-custom view-all-button"  [routerLink]="['/']"  [queryParams]="{show:'all'}">View All</a>
+      </div>
+        <app-product-card [items]="getProducts"  *ngIf="products.length > 0"></app-product-card>
+        <!-- <center *ngIf="products.length == 0">No products added.</center> -->
+    </div>
+</div>
+<ng-template #loadingIcon>
+  <div class="container loader-container">
+    <div class="loader"></div>
+  </div>
+</ng-template>

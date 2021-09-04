@@ -1,0 +1,184 @@
+@import './../../css/settings.scss';
+@import './../../css/svg.scss';
+
+.main-order-tracking-container{
+    padding-top: 90px;
+    padding-bottom: 90px;
+    min-height: 74%;
+}
+.custom-order-tracking-card{
+    background-color: #ffffff;
+    padding: 2rem 3rem;
+    margin: 1rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(127, 157, 187, 0.2) 0px 8px 24px;
+}
+.progress-bar{
+    background-color: $main-color;
+}
+.status-badge{
+    height: 40px;
+    width: 40px;
+    background-color: #e9ecef;
+    border-radius: 50%;
+    position: absolute;
+    top: -13px;
+    left: -3px;
+    padding: 8px;
+}
+.completed-badge{
+    background-color: $main-color;
+}
+.incomplete-badge{
+    background-color: #e9ecef;
+}
+.status-badge-25{
+    top: -13px;
+    left: 24%;
+}
+.status-badge-50{
+    top: -13px;
+    left: 49%;
+}
+.status-badge-75{
+    top: -13px;
+    left: 74%;
+}
+.status-badge-100{
+    top: -13px;
+    left: 98%;
+}
+.zoomed-icon{
+    zoom: 200%;
+}
+.responsive-search{
+    display: none;
+}
+.responsive-margin-id, .responsive-margin-date{
+    margin-bottom: 3rem;
+}
+.order-tracking-large-icons{
+    display: flex;
+    flex-direction: row;
+}
+.track-large-icons-margin{
+    margin-top: 3rem;
+    margin-right: 4%;
+}
+.icon-margin{
+    margin-top: 3rem;
+}
+.order-tracking-product-table{
+    table-layout: fixed;
+    margin-bottom: 0;
+    // width: inherit;
+}
+.responsive-order-status-text{
+    font-size: 1rem;
+}
+.order-rejected{
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+.order-rejected-no-margin{
+    margin-bottom: 5px;
+}
+.view-details-button{
+    margin-top: 0;
+}
+.order-tracking-main{
+    margin-bottom: 1.5rem;
+}
+::ng-deep .view-order-modal {
+    .modal-dialog {
+      max-width: 700px !important;
+      margin: 1.75rem auto !important;
+    }
+    .modal-header{
+        padding: 0.5rem 1rem;
+      }
+      .modal-footer{
+          justify-content: flex-end;
+      }
+  }
+@media only screen and (min-width: 768px) and (max-width: 1199px){
+    .status-badge-100{
+        left: 97%;
+    }
+}
+@media only screen and (max-width: 767px){
+    ::ng-deep .view-order-modal {
+        .modal-dialog {
+          max-width: 500px !important;
+          margin: 1.75rem auto !important;
+        }
+      }
+    .custom-order-tracking-card{
+        padding: 1rem 1rem;
+    }
+    .form-control{
+        width: 64%;
+    }
+    .responsive-search{
+        display: block;
+        width: 2%;
+    }
+    .responsive-margin-id{
+        margin-bottom: 1rem;
+    }
+    .responsive-margin-date{
+        margin-bottom: 2rem;
+    }
+    .text-right{
+        text-align: left !important;
+    }
+    .order-tracking-large-icons{
+        flex-direction: column;
+        width: 75%;
+        float: right;
+    }
+    .order-progress-bar{
+        transform: rotate(90deg);
+        position: absolute;
+        top: 46%;
+        left: -37%;
+    }
+    .status-badge {
+        transform: rotate(-90deg);
+    }
+    .status-badge-25{
+        left: 21%;
+    }
+    .status-badge-50{
+        left: 44%;
+    }
+    .status-badge-75{
+        left: 68%;
+    }
+    .status-badge-100{
+        left: 92%;
+    }
+    .track-large-icons-margin{
+        margin-top: 18%;
+        margin-right: 0;
+    }
+    .order-pending-icon-outer{
+        margin-top: 0 !important;
+    }
+    .icon-margin{
+        margin-top: 0rem;
+    }
+    .tracking-icons-main-outer{
+        display: flex;
+        align-items: center;
+    }
+    .zoomed-icon{
+        zoom: 150%;
+    }
+    .responsive-order-status-text{
+        font-size: 0.75rem;
+        margin: 0;
+    }
+}

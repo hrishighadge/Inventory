@@ -1,0 +1,16 @@
+<div class="container custom-search-container">
+    <div class="row"><div class="col-lg-8 col-md-8 col-sm-12"><h3>Results for {{SearchTerm}}</h3></div></div>
+    <ng-container *ngIf = "products.length > 0; else NoResult">
+        <app-product-card [items]="products"></app-product-card>
+    </ng-container>
+    <ng-template #NoResult>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card custom-search-card">
+                    <div class="no-result-icon mb-2 mt-2"></div>
+                    <h3>No Results</h3>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>

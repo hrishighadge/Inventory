@@ -1,0 +1,67 @@
+@import "../../css/settings.scss";
+
+.addprodcontainer {
+    max-width: 90%;
+    // height: 450px;
+    background-color: #ffffff;
+    padding: 1rem;
+    margin: 2.2rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(127, 157, 187, 0.2) 0px 8px 24px;
+  }
+
+  .prodImage-col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .prodImage{
+    // height: 22vw;
+    // width: 22vw;
+    // // border: 1px dashed black;
+    // border-radius: 2px;
+    // background-color: #c9c9c1;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    text-align: center;
+    border-radius: 2px;
+    background-color: #c9c9c1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .prodImage img{
+    width: 100%;
+    height: 85%;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .prodImage .btn{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
+
+  .error-message{
+    color: red;
+}
+.toast-container{
+  position: fixed;
+  top: 85px;
+  right: 0px;
+  width: 100%;
+  z-index: 999;
+}

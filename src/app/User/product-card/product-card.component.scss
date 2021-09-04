@@ -1,0 +1,52 @@
+@import './../../css/settings.scss';
+@import './../../css/svg.scss';
+
+.card-container{
+    padding: 20px;
+}
+
+.custom-card-body{
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.custom-card-body > p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.custom-marine-card{
+    border-radius: 0px;
+    text-decoration: none;
+    color: $main-color;
+}
+
+.custom-marine-card > img{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.cart-icon{
+    zoom: 90%;
+}
+
+.price-card{
+    background-color: $main-color;
+    color: white;
+    opacity: 0.8;
+    position: absolute;
+    right: 0px;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.card-title{
+    cursor: pointer;
+}
+.img-container img{
+    object-fit: cover;
+    height: 200px;
+    width:100%;
+}

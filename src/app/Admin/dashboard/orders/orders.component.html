@@ -1,0 +1,385 @@
+<div class="container custom-cart-container">
+  <div class="mb-3 search">
+    <form class="form-inline my-2 my-lg-0">
+      <input
+        name="OrderSearch"
+        class="form-control mr-sm-2 search-form-input custom-input"
+        type="search"
+        [(ngModel)]="searchInput"
+        placeholder="Search by ID or Status"
+        aria-label="Search"
+      />
+      <div class="responsive-search"></div>
+      <button
+        class="btn btn-custom btn-dark"
+        (click)="getOrderDetails(searchInput)"
+      >
+        Search
+      </button>
+    </form>
+  </div>
+  <div *ngIf="show" class="search-container">
+    <h6>Search Results</h6>
+    <div class="table-responsive">
+      <table class="table" style="table-layout: fixed">
+        <thead class="orders-table-head">
+          <tr>
+            <th class="admin-prod-table-th" style="width: 76px"></th>
+            <th style="width: 140px">Order ID</th>
+            <th class="admin-prod-data" style="width: 140px">Date</th>
+            <th class="admin-prod-data" style="width: 190px">Transaction ID</th>
+            <th class="admin-prod-data" style="width: 140px">Total Amount</th>
+            <th class="admin-prod-data" style="width: 130px">Method</th>
+            <th class="admin-prod-data" style="width: 200px">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let OrderDetails of searchedOrders">
+            <td style="width: 76px; text-align: center">
+              <button
+                class="view-order-details-icon order-page-button"
+                (click)="open(OrderDetails, content)"
+              ></button>
+            </td>
+            <td style="width: 230px; word-break: break-all">
+              {{ OrderDetails._id }}
+            </td>
+            <td style="width: 140px" class="admin-prod-data">
+              {{ formatDate(OrderDetails.timestamp) }}
+            </td>
+            <td style="width: 190px" class="admin-prod-data">
+              {{ OrderDetails.payment_details.transaction_id }}
+            </td>
+            <td style="width: 140px" class="admin-prod-data">
+              Rs {{ OrderDetails.total_amount }}
+            </td>
+            <th class="admin-prod-data" style="width: 130px; font-weight: 400">
+              {{ OrderDetails.payment_details.mode }}
+            </th>
+            <td class="admin-prod-data" style="width: 200px">
+              <div
+                class="order-accept-reject"
+                *ngIf="
+                  OrderDetails.order_status == 'Pending' ||
+                    OrderDetails.order_status == 'Rejected';
+                  else elseBlock
+                "
+              >
+                <div  [ngClass]="OrderDetails.order_status!='Rejected' ? 'accept-reject-order-button' : 'accept-order-button'">
+                  <button
+                    class="accept-order-icon order-page-button"
+                    (click)="updateStatus(OrderDetails, 'Processed')"
+                  ></button>
+                </div>
+                <div *ngIf="OrderDetails.order_status!='Rejected'" 
+                   class="accept-reject-order-button">
+                  <button
+                    class="reject-order-icon order-page-button"
+                    (click)="updateStatus(OrderDetails, 'Rejected')"
+                  ></button>
+                </div>
+              </div>
+              <ng-template #elseBlock
+                ><div class="order-accept-status">
+                  <select *ngIf="OrderDetails.order_status!='Delivered'" 
+                    class="order-status-dropdown"
+                    (change)="updateStatusEvent(OrderDetails, $event.target)"
+                    [value]="OrderDetails.order_status"
+                  >
+                    <option disabled>Select Status</option>
+                    <option value="Processed">Processed</option>
+                    <option value="Shipped">Shipped</option>
+                    <option value="En-route">En-route</option>
+                    <option value="Delivered">Delivered</option>
+                  </select>
+                  <span  *ngIf="OrderDetails.order_status=='Delivered'" >Delivered</span>
+                </div></ng-template
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <ng-container *ngIf="orders.length > 0; else NoResult">
+        <div class="card custom-cart-card">
+          <div class="new-approve-order-tabs">
+            <ul
+              class="nav nav-pills nav-justified mb-3 order-tabs"
+              id="ex1"
+              role="tablist"
+            >
+              <li class="nav-item" role="presentation">
+                <a
+                  class="nav-link"
+                  id="new-orders-tab"
+                  data-toggle="pill"
+                  role="tab"
+                  aria-controls="outquantity"
+                  aria-selected="false"
+                  [class.active]="viewMode == 'neworders'"
+                  (click)="viewMode = 'neworders'"
+                  >New Orders</a
+                >
+              </li>
+              <li class="nav-item" role="presentation">
+                <a
+                  class="nav-link"
+                  id="approved-orders-tab"
+                  data-toggle="pill"
+                  role="tab"
+                  aria-controls="inquantity"
+                  aria-selected="true"
+                  [class.active]="viewMode == 'approvedorders'"
+                  (click)="viewMode = 'approvedorders'"
+                  >Approved Orders</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="approved-new-orders" [ngSwitch]="viewMode">
+            <div class="new-orders" *ngSwitchCase="'neworders'">
+              <div class="table-responsive">
+                <table class="table" style="table-layout: fixed">
+                  <thead class="orders-table-head">
+                    <tr>
+                      <th class="admin-prod-table-th" style="width: 76px"></th>
+                      <th style="width: 140px">Order ID</th>
+                      <th class="admin-prod-data" style="width: 140px">Date</th>
+                      <th class="admin-prod-data" style="width: 190px">
+                        Transaction ID
+                      </th>
+                      <th class="admin-prod-data" style="width: 140px">
+                        Total Amount
+                      </th>
+                      <th class="admin-prod-data" style="width: 130px">
+                        Method
+                      </th>
+                      <th class="admin-prod-data" style="width: 200px">
+                        Status
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let order of newOrders">
+                      <td style="width: 76px; text-align: center">
+                        <button
+                          class="view-order-details-icon order-page-button"
+                          (click)="open(order, content)"
+                        ></button>
+                      </td>
+                      <td style="width: 230px">{{ order._id }}</td>
+                      <td style="width: 140px" class="admin-prod-data">
+                        {{ formatDate(order.timestamp) }}
+                      </td>
+                      <td style="width: 190px" class="admin-prod-data">
+                        {{ order.payment_details.transaction_id }}
+                      </td>
+                      <td style="width: 140px" class="admin-prod-data">
+                        Rs {{ order.total_amount }}
+                      </td>
+                      <th
+                        class="admin-prod-data"
+                        style="width: 130px; font-weight: 400"
+                      >
+                        {{ order.payment_details.mode }}
+                      </th>
+                      <td class="admin-prod-data" style="width: 200px">
+                        <div class="order-accept-reject">
+                          <div [ngClass]="order.order_status!='Rejected' ? 'accept-reject-order-button' : 'accept-order-button'">
+                            <button
+                              class="accept-order-icon order-page-button"
+                              (click)="updateStatus(order, 'Processed')"
+                            ></button>
+                          </div>
+                          <div *ngIf="order.order_status!='Rejected'"
+                             class="accept-reject-order-button">
+                            <button
+                              class="reject-order-icon order-page-button"
+                              (click)="updateStatus(order, 'Rejected')"
+                            ></button>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="approved-orders" *ngSwitchCase="'approvedorders'">
+              <div class="table-responsive">
+                <table class="table" style="table-layout: fixed">
+                  <thead class="orders-table-head">
+                    <tr>
+                      <th class="admin-prod-table-th" style="width: 76px"></th>
+                      <th style="width: 140px">Order ID</th>
+                      <th class="admin-prod-data" style="width: 140px">Date</th>
+                      <th class="admin-prod-data" style="width: 190px">
+                        Transaction ID
+                      </th>
+                      <th class="admin-prod-data" style="width: 140px">
+                        Total Amount
+                      </th>
+                      <th class="admin-prod-data" style="width: 130px">
+                        Method
+                      </th>
+                      <th class="admin-prod-data" style="width: 200px">
+                        Status
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let order of approvedOrders">
+                      <td style="width: 76px; text-align: center">
+                        <button
+                          class="view-order-details-icon order-page-button"
+                          (click)="open(order, content)"
+                        ></button>
+                      </td>
+                      <td style="width: 230px">{{ order._id }}</td>
+                      <td style="width: 140px" class="admin-prod-data">
+                        {{ formatDate(order.timestamp) }}
+                      </td>
+                      <td style="width: 190px" class="admin-prod-data">
+                        {{ order.payment_details.transaction_id }}
+                      </td>
+                      <td style="width: 140px" class="admin-prod-data">
+                        Rs {{ order.total_amount }}
+                      </td>
+                      <th
+                        class="admin-prod-data"
+                        style="width: 130px; font-weight: 400"
+                      >
+                        {{ order.payment_details.mode }}
+                      </th>
+                      <td class="admin-prod-data" style="width: 200px">
+                        <div class="order-accept-status">
+                          <select *ngIf="order.order_status!='Delivered'" 
+                            class="order-status-dropdown"
+                            (change)="updateStatusEvent(order, $event.target)"
+                            [value]="order.order_status"
+                          >
+                            <option disabled>Select Status</option>
+                            <option value="Processed">Processed</option>
+                            <option value="Shipped">Shipped</option>
+                            <option value="En-route">En-route</option>
+                            <option value="Delivered">Delivered</option>
+                          </select>
+                          <b *ngIf="order.order_status=='Delivered'" >Delivered</b>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #NoResult>
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card noorders-cart-card">
+              <div class="no-orders-icon mb-2 mt-2"></div>
+              <h3>Currently there are No Orders!!</h3>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss" style="max-width: 800px">
+  <div class="modal-header">
+    <div class="col-sm-12">
+      <h5 class="modal-title">Order Details</h5>
+    </div>
+  </div>
+  <div class="modal-body" style="overflow-x: auto">
+    <div class="order-user-details mb-2">
+      <div class="order-user-details-data">
+        <div class="user-name-email">
+          <div
+            class="
+              col-lg-12 col-md-12 col-sm-12 col-xs-12
+              admin-order-prod-name
+            "
+            style="line-height: 30px"
+          >
+            <span style="font-weight: 700">Name: </span>
+            <span>{{ viewOrder.buyername }}</span>
+          </div>
+          <div
+            class="col-lg-12 col-sm-12 col-xs-12 admin-order-prod-name"
+            style="line-height: 30px"
+          >
+            <span style="font-weight: 700">Email: </span
+            ><span>{{ viewOrder.email }}</span>
+          </div>
+        </div>
+        <div class="order-address">
+          <div class="col-sm-6" style="line-height: 30px">
+            <span style="font-weight: 700">Address: </span>
+            <span>
+              {{ viewOrder.shipping_address.address_line1 }},
+              {{ viewOrder.shipping_address.address_line1 }}<br />
+              {{ viewOrder.shipping_address.state }},
+              {{ viewOrder.shipping_address.city }},
+              {{ viewOrder.shipping_address.postal_code }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="product-list">
+      <table
+        class="table table-hover"
+        style="table-layout: fixed; margin-bottom: 0"
+      >
+        <thead>
+          <tr>
+            <!-- <th style="width: 30px;">#</th> -->
+            <th class="admin-order-prod-name" style="width: 150px">
+              Product name
+            </th>
+            <th class="admin-prod-data" style="width: 150px">Part Number</th>
+            <th class="admin-prod-data" style="width: 100px">Quantity</th>
+            <th class="admin-prod-data" style="width: 150px">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of viewOrder.products">
+            <!-- <th scope="row" style="width: 30px;">1</th> -->
+            <td class="admin-order-prod-name" style="width: 150px">
+              {{ product.product_name }}
+            </td>
+            <td class="admin-prod-data" style="width: 150px">
+              {{ product.part_number }}
+            </td>
+            <td class="admin-prod-data" style="width: 100px">
+              {{ product.quantity }}
+            </td>
+            <td class="admin-prod-data" style="width: 150px">
+              Rs {{ product.selling_price }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="d('Cross click')"
+      style="background-color: #393d46; margin: 0"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>

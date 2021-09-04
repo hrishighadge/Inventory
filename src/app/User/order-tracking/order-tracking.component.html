@@ -1,0 +1,160 @@
+<div class="container main-order-tracking-container">
+    <div class="row"><div class="col-lg-8 col-md-8 col-sm-12"><h3>Track your Order</h3></div></div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card custom-order-tracking-card">
+                <div class="mb-5">
+                    <form class="form-inline my-2 my-lg-0">
+                        <input name="OrderSearch" class="form-control mr-sm-2 search-form-input" [(ngModel)]="inputId" type="search" placeholder="Search by Order ID" aria-label="Search"/>
+                        <div class="responsive-search"></div>
+                        <button class="btn btn-custom" (click)="getOrderDetails(inputId)">Search</button>
+                    </form>
+                </div>
+                <hr class="w-100">
+                <div class="container" *ngIf="IDs.length>0">
+                    <div class="row" *ngIf="IDs.length>0">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 responsive-margin-id">
+                            <h5>ORDER ID : {{OrderDetails._id}}</h5>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 responsive-margin-date">
+                            <h5 class="text-right">Date : {{ formatDate(OrderDetails.timestamp)}}</h5>
+                        </div>
+                        <div class="col-12 order-rejected" *ngIf="OrderProgress==-1">
+                          <div class="order-rejected-icon zoomed-icon"></div>
+                          <div class="order-reject-text">
+                            <p class="order-rejected-no-margin">Your Order has been rejected!!!</p>
+                            <p>Kindly contact on <span style="font-weight: 700;">+6563861372 / +6563851375</span> for details.</p>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs12"></div>
+                        <div class="order-tracking-main col-12"  *ngIf="OrderProgress>-1">
+                            <div class="col-lg-12 col-lg-md-12 col-sm-12 col-xs-6 order-progress-bar">
+                                <div class="progress">
+                                    <div class="progress-bar" [ngStyle]="{'width.%': OrderProgress}"></div>
+                                </div>
+                                <div class="status-badge completed-badge">
+                                  <div class="order-pending-white-icon"></div>
+                                </div>
+                                <div class="status-badge status-badge-25" [ngClass]="OrderProgress >= 25 ? 'completed-badge' : 'incomplete-badge'">
+                                    <div [ngClass]="OrderProgress >= 25 ? 'order-processed-white-icon' : 'order-processed-icon'"></div>
+                                </div>
+                                <div class="status-badge status-badge-50" [ngClass]="OrderProgress >= 50 ? 'completed-badge' : 'incomplete-badge'">
+                                    <div [ngClass]="OrderProgress >= 50 ? 'order-shipped-white-icon' : 'order-shipped-icon'"></div>
+                                </div>
+                                <div class="status-badge status-badge-75" [ngClass]="OrderProgress >= 75 ? 'completed-badge' : 'incomplete-badge'">
+                                    <div [ngClass]="OrderProgress >= 75 ? 'order-enroute-white-icon' : 'order-enroute-icon'"></div>
+                                </div>
+                                <div class="status-badge status-badge-100" [ngClass]="OrderProgress == 100 ? 'completed-badge' : 'incomplete-badge'">
+                                    <div [ngClass]="OrderProgress == 100 ? 'order-delivered-white-icon' : 'order-delivered-icon'"></div>
+                                </div>
+                            </div>
+                            <div class="order-tracking-large-icons col-lg-12 col-md-12 col-sm-12 col-xs-6">
+                                <div class="col-lg-2 track-large-icons-margin order-pending-icon-outer">
+                                    <div class="icon-margin text-center tracking-icons-main-outer">
+                                        <div class="order-pending-icon zoomed-icon"></div>
+                                        <h5 class="responsive-order-status-text">Awaiting Confirmation</h5>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 track-large-icons-margin">
+                                  <div class="icon-margin text-center tracking-icons-main-outer">
+                                      <div class="order-processed-icon zoomed-icon"></div>
+                                      <h5 class="responsive-order-status-text">Order Processed</h5>
+                                  </div>
+                                </div>
+                                <div class="col-lg-2 track-large-icons-margin">
+                                    <div class="icon-margin text-center tracking-icons-main-outer">
+                                        <div class="order-shipped-icon zoomed-icon"></div>
+                                        <h5 class="responsive-order-status-text">Order Shipped</h5>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 track-large-icons-margin">
+                                    <div class="icon-margin text-center tracking-icons-main-outer">
+                                        <div class="order-enroute-icon zoomed-icon"></div>
+                                        <h5 class="responsive-order-status-text">Order En-route</h5>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 track-large-icons-margin">
+                                    <div class="icon-margin text-center tracking-icons-main-outer">
+                                        <div class="order-delivered-icon zoomed-icon"></div>
+                                        <h5 class="responsive-order-status-text">Order Delivered</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="btn btn-custom view-details-button" (click)="open(content)" *ngIf="IDs.length>0">View Details</a>
+                <div class="container" *ngIf="IDs.length==0">
+                  <div class="col-12 order-rejected">
+                    <div class="order-rejected-icon zoomed-icon"></div>
+                    <div class="order-reject-text">
+                      <p class="order-rejected-no-margin">Please enter valid Order ID!!</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss" style="max-width: 800px;">
+    <div class="modal-header">
+      <div class="col-sm-12">
+        <h5 class="modal-title">Order Details</h5>
+      </div>
+    </div>
+    <div class="modal-body" style="overflow-x: auto;">
+      <div class="order-user-details mb-2">
+        <div class="order-user-details-data">
+          <div class="user-name-email">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 admin-order-prod-name" style="line-height: 30px;">
+              <span style="font-weight: 700;">Name: </span> <span>{{OrderDetails.buyername}}</span>
+            </div>
+            <div class="col-lg-12 col-sm-12 col-xs-12 admin-order-prod-name" style="line-height: 30px;">
+              <span style="font-weight: 700;">Email: </span><span>{{OrderDetails.email}}</span>
+            </div>
+          </div>
+          <div class="order-address">
+            <div class="col-sm-6" style="line-height: 30px;">
+              <span style="font-weight: 700;">Address: </span> <span>
+                {{OrderDetails.shipping_address.address_line1}}, 
+                {{OrderDetails.shipping_address.address_line1}}<br>
+                {{OrderDetails.shipping_address.state}}, 
+                {{OrderDetails.shipping_address.city}},
+                {{OrderDetails.shipping_address.postal_code}}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="product-list">
+        <table class="table table-hover order-tracking-product-table">
+          <thead>
+            <tr>
+              <!-- <th style="width: 30px;">#</th> -->
+              <th class="admin-order-prod-name" style="width: 150px;">Product name</th>
+              <th class="admin-prod-data" style="width: 150px;text-align: center;">Part Number</th>
+              <th class="admin-prod-data" style="width: 100px;text-align: center;">Quantity</th>
+              <th class="admin-prod-data" style="width: 115px;text-align: center;">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of OrderDetails.products">
+              <!-- <th scope="row" style="width: 30px;">1</th> -->
+              <td class="admin-order-prod-name" style="width: 150px;text-overflow: ellipsis;overflow: hidden;">{{product.product_name}}</td>
+              <td class="admin-prod-data" style="width: 150px;text-align: center;">{{product.part_number}}</td>
+              <td class="admin-prod-data" style="width: 100px;text-align: center;">{{product.quantity}}</td>
+              <td class="admin-prod-data" style="width: 115px;text-align: center;">Rs {{product.selling_price}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="d('Cross click')"
+        style="background-color: #393d46;margin: 0;">
+        Close
+      </button>
+    </div>
+  </ng-template>
+  <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>

@@ -1,0 +1,54 @@
+<div class="login-main">
+  <div class="loginContainer border rounded">
+    <div>
+      <h2>Admin Login</h2>
+      <br />
+      <div *ngIf="error" class="alert alert-danger" role="alert">
+        {{ errorMsg }}
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="username" class="form-label">Email</label>
+          <input
+            type="email"
+            email
+            formControlName="email"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+          />
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+            <div *ngIf="f.email.errors.email">Email is invalid</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            formControlName="password"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+            minlength="8"
+          />
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+            <div *ngIf="f.password.errors.minlength">
+              Password should be atleast 8 characters long
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button
+            [disabled]="loading"
+            class="btn btn-dark btn-custom btn-login"
+            type="submit"
+          >
+            Login
+          </button>
+          <!-- <a href="#" class="btn-link">Forgot Password?</a> -->
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

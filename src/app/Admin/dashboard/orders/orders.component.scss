@@ -1,0 +1,132 @@
+@import url("../../../css/settings.scss");
+@import url("../../../css/svg.scss");
+
+.search {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 3rem;
+}
+.custom-input {
+  width: 70%;
+  margin-right: 0.5rem !important ;
+}
+.search-container {
+  background-color: #ffffff;
+  padding: 1rem;
+  margin: 1rem auto;
+  box-shadow: rgba(127, 157, 187, 0.2) 0px 8px 24px;
+}
+
+.custom-cart-container {
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+.custom-cart-card {
+  min-height: 535px;
+  background-color: #ffffff;
+  padding: 1rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  // justify-content: center;
+  box-shadow: rgba(127, 157, 187, 0.2) 0px 8px 24px;
+}
+.noorders-cart-card {
+  min-height: 540px;
+  background-color: #ffffff;
+  padding: 1rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgba(127, 157, 187, 0.2) 0px 8px 24px;
+}
+.admin-order-text {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.admin-prod-data {
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.admin-order-prod-name {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.order-page-button {
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.order-accept-reject {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.accept-reject-order-button {
+  width: 50%;
+}
+.accept-order-button {
+  width: 100%;
+}
+.order-status-dropdown {
+  padding: 3px 5px;
+}
+.new-approve-order-tabs {
+  width: 100%;
+}
+.order-tabs {
+  width: 80%;
+  margin: 0 auto;
+}
+.nav-pills .nav-link.active,
+.nav-pills .show {
+  color: #fff;
+  background-color: #393d46 !important;
+}
+a {
+  color: black;
+}
+.approved-new-orders {
+  width: -webkit-fill-available;
+}
+.table-responsive {
+  max-height: 440px;
+  overflow-y: auto;
+}
+.orders-table-head {
+  position: sticky;
+  top: 0%;
+  background-color: #fff;
+}
+.order-user-details-data {
+  width: 100%;
+}
+.order-address {
+  word-wrap: break-word;
+  padding-bottom: 0.5rem;
+}
+.product-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+// @media only screen and (max-width: 767px){
+//   .user-name-email{
+//     flex-direction: column;
+//   }
+// }
+@media only screen and (min-width: 576px) {
+  ::ng-deep .view-order-modal {
+    .modal-dialog {
+      max-width: 800px !important;
+      margin: 1.75rem auto !important;
+    }
+    .modal-header {
+      padding: 0.5rem 1rem;
+    }
+  }
+}

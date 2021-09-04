@@ -1,0 +1,17 @@
+@import './../../css/settings.scss';
+@import './../../css/svg.scss';
+
+.custom-search-container{
+    padding-top: 60px;
+    padding-bottom: 60px;
+    height: 74%;
+}
+.custom-search-card{
+    background-color: #ffffff;
+    padding: 1rem;
+    margin: 2.2rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(127, 157, 187, 0.2) 0px 8px 24px;
+}

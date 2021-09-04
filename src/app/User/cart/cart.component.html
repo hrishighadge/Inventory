@@ -1,0 +1,52 @@
+<div class="container custom-cart-container">
+    <div class="row"><div class="col-lg-8 col-md-8 col-sm-12"><h3>Your Cart</h3></div></div>
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <div class="card custom-cart-card">
+                <div class="table-responsive">
+                    <table class="table cart-table" *ngIf="cart.length>0">
+                        <thead>
+                        <tr>
+                            <th class="cart-prod-data cart-prod-name">Product</th>
+                            <th class="cart-prod-data cart-prod-quantity">Quantity</th>
+                            <th class="cart-prod-data cart-prod-sell-price">Selling Price</th>
+                            <th class="cart-prod-data cart-prod-price">Total Price</th>
+                            <th class="cart-product-remove"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let item of products">
+                            <td [title]="item.product_name" class="cart-prod-name">
+                                <img [src]="SERVER_URL+item.product_image" class="product-image-container">
+                            {{item.product_name}}
+                            </td>
+                            <td class="product-price cart-prod-data cart-prod-quantity">
+                                <button type="button" class="btn" (click)="updateQauantity(item, -  1)" ><b>-</b></button>
+                                <input class="form-control cart-quantity" type="number" [value]="item.quantity"/>
+                                <button type="button" class="btn" (click)="updateQauantity(item, 1)" ><b>+</b></button>
+                            </td>
+                            <td class="product-price cart-prod-data cart-prod-sell-price">Rs {{item.selling_price}}</td>
+                            <td class="product-price cart-prod-data cart-prod-price">Rs {{item.total_price}}</td>
+                            <td class="product-price cart-prod-data cart-product-remove"><div class="cancel-icon" (click)="deleteFromCart(item)"></div></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <p *ngIf="cart.length==0"> No products in cart.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="card custom-cart-card">
+                <h5>Cart Summary</h5>
+                <div class="row cart-summary">
+                    <div class="col-7" style="text-align: center;">Total</div>
+                    <div class="col-5">Rs {{ cartTotal}}</div>
+                </div>
+                <div>
+                    <button class="btn btn-custom" [routerLink]="['/checkout']" [disabled]="products.length==0">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>

@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 card-container" *ngFor="let item of items">
+        <a class="card custom-marine-card">
+            <a [routerLink]="['/product']" [queryParams]="{id:item._id, name:item.product_name}" [state]="item">
+                <div class="price-card">Rs {{item.selling_price}}</div>
+                <div class="img-container">
+                    <img class="card-img-top" [src]="SERVER_URL+item.product_image" alt="Card image">
+                </div>
+            </a>
+            <div class="card-body custom-card-body">
+                <p class="card-title" [routerLink]="['/product']" [queryParams]="{id:item._id, name:item.product_name}" [state]="item">{{item.product_name}}</p>
+                
+                <a class="btn btn-custom-outline" *ngIf="item.inCart" [routerLink]="['cart']">
+                    <div class="cart-icon"></div> View Cart
+                </a>
+                <a class="btn btn-custom-outline" *ngIf="!item.inCart" (click)="addTocart(item)">
+                    <div class="cart-icon"></div> Add to Cart
+                </a>
+            </div>
+        </a>
+    </div>
+</div>
+
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>

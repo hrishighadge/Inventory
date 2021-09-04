@@ -1,0 +1,125 @@
+@import '../css/svg.scss';
+// .marine-footer{
+//   position: fixed;
+//   bottom: 0;
+//   width: 100%;
+// }
+.social-icons
+{
+  padding-left:0;
+  margin-bottom:0;
+  list-style:none;
+  display: flex;
+  // justify-content: center;
+}
+.social-icons li
+{
+  display:inline-block;
+  margin-bottom:4px
+}
+.social-icons li.title
+{
+  margin-right:15px;
+  text-transform:uppercase;
+  color:#96a2b2;
+  font-weight:700;
+  font-size:13px
+}
+.social-icons a{
+  background-color:#eceeef;
+  color:#818a91;
+  font-size:16px;
+  display:inline-block;
+  line-height:44px;
+  width:44px;
+  height:44px;
+  text-align:center;
+  margin-right:8px;
+  border-radius:100%;
+  -webkit-transition:all .2s linear;
+  -o-transition:all .2s linear;
+  transition:all .2s linear
+}
+.custom-container-footer{
+    padding: 10px;
+}
+.copyright-text{
+  line-height: 50px;
+}
+.marine-footer{
+    border-top: 1px solid #cccccc;
+    background-color: white;
+}
+h6{
+  font-size:17px;
+  text-transform:uppercase;
+  margin-top:5px;
+  letter-spacing:2px
+}
+.footer-links
+{
+  padding-left:0;
+  list-style:none;
+  margin-bottom: 0 !important;
+}
+.footer-links li
+{
+  display:block
+}
+.footer-links a
+{
+  color:#000;
+  line-height: 25px;
+  font-size: 14px;
+}
+.footer-links a:active,.footer-links a:focus,.footer-links a:hover
+{
+  color:#3366cc;
+  text-decoration:none;
+}
+.footer-links.inline li
+{
+  display:inline-block
+}
+.facebook-icon{
+    margin-top: 12px;
+}
+.twitter-icon{
+    margin-top: 13px;
+}
+.insta-icon{
+    margin-top: 13px;
+}
+.linkedin-icon{
+    margin-top: 25%;
+}
+.legal-links{
+  border-right: 1px solid #6c757d;
+}
+.main-links-border{
+  border-bottom: 3px solid #818a91;
+}
+@media only screen and (max-width: 767px){
+  .copyright-text{
+    line-height: 25px;
+    margin-bottom: 10px;
+    // text-align: center;
+  }
+  .social-icons{
+    margin-top: 15px;
+    justify-content: space-between;
+  }
+  .col-xs-6{
+    width: 50%;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px){
+  .copyright-text{
+    line-height: 25px;
+    margin-bottom: 0px;
+  }
+  .footer-links a
+  {
+    line-height: 25px;
+  }
+}
